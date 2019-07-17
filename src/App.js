@@ -6,7 +6,11 @@ import {
   Marker
 } from "react-google-maps";
 import { compose, withProps } from "recompose";
+import axios from 'axios';
 import './App.css';
+const FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues/search';
+const FOURSQUARE_CLIENT_ID = 'GW4BOYYDH0MOJNVIRDSGGNPG5TPWXZT2EUB5HLVB5DSFHJIT';
+const FOURSQUARE_CLIENT_SECRET = 'LCQMWRUF0BTHSNPRJFNJFMGE2TNUVZXKHQZQQ4ALBA3XLII3';
 
 const Map = compose(
   withProps({
@@ -24,6 +28,22 @@ const Map = compose(
   </GoogleMap>
 ));
 
+function getCredentials() {
+  return `client_id=${FOURSQUARE_CLIENT_ID}&client_secret=${FOURSQUARE_CLIENT_SECRET}&v=20190831`
+}
+function getVenues(params) {
+  return axios.get(`${FOURSQUARE_BASE_URL}?${params}&${getCredentials()}`)
+          .then((response) => {
+            return response.data.response;
+          })
+}
+
+let params = {
+  query: '',
+  near: 'São Paulo, SP'
+}
+
+getVenues(new URLSearchParams(params));
 
 
 function App() {
