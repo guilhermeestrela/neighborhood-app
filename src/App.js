@@ -1,5 +1,6 @@
 import React from 'react';
 import Map from './Map';
+import SearchList from './SearchList';
 import axios from 'axios';
 import './App.css';
 const FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues/search';
@@ -24,19 +25,35 @@ export default class MapsApp extends React.Component {
             })
   }
 
+  searchVenues = (value) => {
+      let params = {
+          query: value,
+          near: 'São Paulo, SP',
+          categoryId: '4d4b7105d754a06374d81259'
+      }
+
+      return this.getVenues(new URLSearchParams(params));
+  }
+
   componentDidMount() {
     let params = {
-      query: '',
-      near: 'São Paulo, SP'
+        query: '',
+        near: 'São Paulo, SP',
+        categoryId: '4d4b7105d754a06374d81259'
     };
 
-    this.getVenues(new URLSearchParams(params));
+    return this.getVenues(new URLSearchParams(params));
   }
   
   render() {
     return (
-      <div className="App">
-        <Map key="map" venues={this.state.venues}/>
+      <div className="App columns">
+          <div style={{width: `30%`, float: 'left'}}>
+              <SearchList venues={this.state.venues} search={this.searchVenues}/>
+          </div>
+        <div style={{ width: `70%`, float: 'right' }}>
+            <Map key="map" venues={this.state.venues} />
+        </div>
       </div>
     );
   }
