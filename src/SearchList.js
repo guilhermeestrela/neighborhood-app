@@ -14,13 +14,17 @@ export default class SearchList extends React.Component{
             return this.props.search(event.target.value)
         }
     }
+    handleClick = (venueId) => {
+        return this.props.showMarkerInfo(venueId);
+    }
+
     render() {
         return (
             <div>
                 <div>
-                    <input type="text" placeholder="Search by title or author" onChange={this.handleChange} value={this.state.query}/>
+                    <input type="text" placeholder="Search for restaurants near Bela Vista" onChange={this.handleChange} value={this.state.query}/>
                 </div>
-                {this.props.venues.map((venue) => <div key={venue.id}>{venue.name}</div>)}
+                {this.props.venues.map((venue) => <div key={venue.id} onClick={() => this.handleClick(venue.id)}>{venue.name}</div>)}
             </div>
         );
     }

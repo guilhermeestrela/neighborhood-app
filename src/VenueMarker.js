@@ -4,19 +4,27 @@ import {InfoWindow, Marker} from "react-google-maps";
 export default class VenueMarker extends React.Component {
 
     // State.
-    state = {open: false}
+   constructor(props) {
+       super(props);
+       this.state = {
+           isOpen: props.isOpen
+       }
+   }
     handleClick = () => {
         this.setState({
-            open: !this.state.open
-        });
+            isOpen: !this.state.isOpen
+        })
     }
 
     // Render.
     render() {
+       console.log(this.props);
         // Return Restaurant Marker Component.
         return (
-            <Marker key={this.props.id} position={{ lat: this.props.location.lat, lng: this.props.location.lng }} onClick={this.handleClick}>
-                {this.state.open && (
+            <Marker key={this.props.id}
+                    position={{ lat: this.props.location.lat, lng: this.props.location.lng }}
+                    onClick={this.handleClick}>
+                {(this.state.isOpen) && (
                     <InfoWindow onCloseClick={()=>this.handleClick(this)}><div>{this.props.name}</div></InfoWindow>
                 )}
             </Marker>
