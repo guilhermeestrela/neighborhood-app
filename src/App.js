@@ -1,6 +1,7 @@
 import React from 'react';
 import Map from './Map';
 import SearchList from './SearchList';
+import VenueDetails from './VenueDetails';
 import axios from 'axios';
 import './App.css';
 const FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues/search';
@@ -46,8 +47,8 @@ export default class MapsApp extends React.Component {
       return this.getVenues(new URLSearchParams(this.state.params));
   }
 
-  showMarkerInfo = (venueId) => {
-      return this.refs.map.showMarkerInfo(venueId)
+  showMarkerInfo = (venue) => {
+      return this.refs.venueDetails.show(venue)
   }
 
   componentDidMount() {
@@ -60,9 +61,10 @@ export default class MapsApp extends React.Component {
           <div style={{width: `30%`, float: 'left'}}>
               <SearchList venues={this.state.venues} search={this.searchVenues} showMarkerInfo={this.showMarkerInfo} ref="list"/>
           </div>
-        <div style={{ width: `70%`, float: 'right' }}>
-            <Map key="map" venues={this.state.venues} location={this.state.params.ll} ref="map"/>
-        </div>
+          <div style={{ width: `70%`, float: 'right' }}>
+              <Map key="map" venues={this.state.venues} location={this.state.params.ll} ref="map" showMarkerInfo={this.showMarkerInfo} />
+          </div>
+          <VenueDetails key="venue-details" ref="venueDetails"/>
       </div>
     );
   }

@@ -19,7 +19,7 @@ const MapWithMarkers = compose(
     withGoogleMap
 )(props => {
     return  <GoogleMap defaultZoom={15} defaultCenter={{ lat: -23.5619026, lng: -46.6555644 }}>
-        {props.venues.map((venue) => <VenueMarker key={venue.id} {...venue} isOpen={props.activeMarker === venue.id} />)}
+        {props.venues.map((venue) => <VenueMarker key={venue.id} {...venue} showMarkerInfo={props.showMarkerInfo} />)}
     </GoogleMap>
 });
 
@@ -31,14 +31,14 @@ export default class Map extends React.Component {
             activeMarker: ''
         }
     }
-    showMarkerInfo(venueId) {
-        return this.setState({activeMarker: venueId});
+    showMarkerInfo = (venue) => {
+        return this.props.showMarkerInfo(venue);
     }
     render() {
         if (this.props.venues) {
             return(
                 <div>
-                    <MapWithMarkers venues={this.props.venues} activeMarker={this.state.activeMarker}/>
+                    <MapWithMarkers venues={this.props.venues} showMarkerInfo={this.showMarkerInfo}/>
                 </div>
             )
         }

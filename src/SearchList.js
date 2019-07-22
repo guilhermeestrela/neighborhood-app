@@ -14,8 +14,8 @@ export default class SearchList extends React.Component{
             return this.props.search(event.target.value)
         }
     }
-    handleClick = (venueId) => {
-        return this.props.showMarkerInfo(venueId);
+    handleClick = (venue) => {
+        return this.props.showMarkerInfo(venue);
     }
 
     render() {
@@ -24,7 +24,7 @@ export default class SearchList extends React.Component{
                 <div>
                     <input type="text" placeholder="Search for restaurants near Bela Vista" onChange={this.handleChange} value={this.state.query}/>
                 </div>
-                {this.props.venues.map((venue) => <div key={venue.id} onClick={() => this.handleClick(venue.id)}>{venue.name}</div>)}
+                {this.props.venues.map((venue) => <div key={venue.id} onClick={() => this.handleClick(venue)}>{venue.name}</div>)}
             </div>
         );
     }
