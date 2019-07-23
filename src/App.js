@@ -55,7 +55,7 @@ export default class MapsApp extends React.Component {
   }
 
   showMarkerInfo = (venue) => {
-      return this.refs.venueDetails.show(venue);
+      return this.getVenueDetails(venue);
   }
 
   componentDidMount() {
