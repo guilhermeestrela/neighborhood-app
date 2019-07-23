@@ -3,16 +3,14 @@
 Final project for Udacity Front-End Nanodegree Course.
 This is a React app that shows you restaurants around Bela Vista, SP.
 
-You can get more info about a restaurant:
+You can get more info about a restaurant, clicking on a marker or a list item:
 - Address
 - Price
 - Read
 
-You also can search for new books, and add then on you list.
-
 ## Demo 
 
-The project demo is available [here](https://guilhermeestrela-mybooks.herokuapp.com/)
+The project demo is available [here](https://neighborhoods-app.herokuapp.com/)
 
 ## How to run
 
@@ -27,3 +25,7 @@ You can check the project search terms. [SEARCH_TERMS.md](SEARCH_TERMS.md). That
 ## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
+## Dependencies
+
+This project uses Google Maps API to show the map. And use Foursquare API to get the list of restaurants and the details of the selected one.
