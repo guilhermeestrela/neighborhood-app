@@ -3,11 +3,12 @@
 
 .venue-details
   position: fixed
-  height: 100vh
+  height: 100%
   width: auto
   top: 0
   right: 0
-  background-color: rgba(0, 0, 0, 0.5)
+  padding: 0
+  background-color: rgba(0, 0, 0, 0.8)
   color: #fff
   max-width: 0
   transition: all 0.4s
@@ -18,6 +19,16 @@
     padding: 1rem
 
 .map
-  position: fixed
+  position: absolute
   right: 0
   top: 0
+  width: 100%
+
+.list-item
+  cursor: pointer
+
+.search-list
+  .input,
+  .button
+    margin-bottom: 1rem
+

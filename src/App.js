@@ -6,13 +6,12 @@ import axios from 'axios';
 import './App.sass';
 const FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues';
 const FOURSQUARE_CLIENT_ID = 'GW4BOYYDH0MOJNVIRDSGGNPG5TPWXZT2EUB5HLVB5DSFHJIT';
-const FOURSQUARE_CLIENT_SECRET = 'LCQMWRUF0BTHSNPRJFNJFMGE2TNUVZXKHQZQQ4ALBA3XLII3';
+const FOURSQUARE_CLIENT_SECRET = 'JOSFCQL1A23LCQFNEIBJR1XBRUA1GJH0SJPQO04BZKJOY1EI';
 
 
 export default class MapsApp extends React.Component {
   constructor(props) {
     super(props);
-    this.child = React.createRef();
 
     this.state = {
         venues: [],
@@ -39,7 +38,6 @@ export default class MapsApp extends React.Component {
   getVenueDetails(venueId) {
       return axios.get(`${FOURSQUARE_BASE_URL}/${venueId}?${this.getCredentials()}`)
           .then((response) => {
-              this.refs.venueDetails.close();
 
               return this.refs.venueDetails.show(response.data.response.venue);
           })
@@ -57,7 +55,7 @@ export default class MapsApp extends React.Component {
   }
 
   showMarkerInfo = (venue) => {
-      return this.getVenueDetails(venue.id)
+      return this.refs.venueDetails.show(venue);
   }
 
   componentDidMount() {
@@ -66,10 +64,10 @@ export default class MapsApp extends React.Component {
   
   render() {
     return (
-      <section className={"section"}>
-          <div className="App tile is-ancestor">
+      <section className={"container"}>
+          <div className="App columns is-desktop">
               <SearchList venues={this.state.venues} search={this.searchVenues} showMarkerInfo={this.showMarkerInfo} ref="list"/>
-              <div className={"tile is-parent is-9 map"}>
+              <div className={"column is-relative is-three-quarters"}>
                   <Map key="map" venues={this.state.venues} location={this.state.params.ll} ref="map" showMarkerInfo={this.showMarkerInfo} />
               </div>
               <VenueDetails key="venue-details" ref="venueDetails"/>

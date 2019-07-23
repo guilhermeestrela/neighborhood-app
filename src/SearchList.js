@@ -17,19 +17,26 @@ export default class SearchList extends React.Component{
     handleClick = (venue) => {
         return this.props.showMarkerInfo(venue);
     }
+    showSuggestions(event) {
+        event.preventDefault();
+        document.querySelector('.list').classList.toggle('is-hidden-mobile');
+    }
 
     render() {
         const allVenues = this.props.venues.length > 0 ?
             (this.props.venues.map((venue) => <li key={venue.id} onClick={() => this.handleClick(venue)} className={"list-item"}>{venue.name}</li>)) :
             <li className={"list-item has-text-danger"}>Not found!!</li>
         return (
-            <div className={"tile is-parent is-vertical is-3"}>
-                <div className={"tile is-child"}>
+            <div className={"column is-one-quarter is-full-mobile search-list"}>
+                <div className={"box"}>
                     <input type="text" className={"input"} placeholder="Search restaurants near Bela Vista" onChange={this.handleChange} value={this.state.query}/>
+                    <button className={"is-hidden-desktop button"} aria-label={"Show suggestions"} onClick={this.showSuggestions}>
+                        Show suggestions
+                    </button>
+                    <ul className="list is-hidden-mobile">
+                        { allVenues }
+                    </ul>
                 </div>
-                <ul className="list">
-                    { allVenues }
-                </ul>
             </div>
         );
     }

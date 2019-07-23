@@ -10,13 +10,17 @@ export default class VenueDetails extends React.Component {
         }
     }
     show(venue) {
-        this.setState({
+        if (venue.id === this.state.venue.id) {
+            return this.close();
+        }
+
+        return this.setState({
             ...this.state,
             venue,
-            open: !this.state.open
+            open: true
         })
     }
-    close() {
+    close = () => {
         this.setState({
             ...this.state,
             open: false
@@ -26,7 +30,7 @@ export default class VenueDetails extends React.Component {
         const { venue } = this.state;
 
         return (
-            <div className={"tile venue-details " + (this.state.open  ? 'show' : '')}>
+            <div className={"column is-one-quarter is-full-mobile venue-details " + (this.state.open  ? 'show' : '')} onClick={this.close}>
                 <div className="content">
                     <h2 className={"title has-text-white"}>
                         { venue.name }
