@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import MapsApp from './App';
 import * as serviceWorker from './serviceWorker';
 

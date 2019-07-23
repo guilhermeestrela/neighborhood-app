@@ -3,8 +3,8 @@ import Map from './Map';
 import SearchList from './SearchList';
 import VenueDetails from './VenueDetails';
 import axios from 'axios';
-import './App.css';
-const FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues/search';
+import './App.sass';
+const FOURSQUARE_BASE_URL = 'https://api.foursquare.com/v2/venues';
 const FOURSQUARE_CLIENT_ID = 'GW4BOYYDH0MOJNVIRDSGGNPG5TPWXZT2EUB5HLVB5DSFHJIT';
 const FOURSQUARE_CLIENT_SECRET = 'LCQMWRUF0BTHSNPRJFNJFMGE2TNUVZXKHQZQQ4ALBA3XLII3';
 
@@ -30,10 +30,19 @@ export default class MapsApp extends React.Component {
   }
 
  getVenues(params) {
-    return axios.get(`${FOURSQUARE_BASE_URL}?${params}&${this.getCredentials()}`)
+    return axios.get(`${FOURSQUARE_BASE_URL}/search?${params}&${this.getCredentials()}`)
             .then((response) => {
                this.setState({venues: response.data.response.venues});
             })
+  }
+
+  getVenueDetails(venueId) {
+      return axios.get(`${FOURSQUARE_BASE_URL}/${venueId}?${this.getCredentials()}`)
+          .then((response) => {
+              this.refs.venueDetails.close();
+
+              return this.refs.venueDetails.show(response.data.response.venue);
+          })
   }
 
   searchVenues = (value) => {
@@ -48,7 +57,7 @@ export default class MapsApp extends React.Component {
   }
 
   showMarkerInfo = (venue) => {
-      return this.refs.venueDetails.show(venue)
+      return this.getVenueDetails(venue.id)
   }
 
   componentDidMount() {
@@ -57,15 +66,15 @@ export default class MapsApp extends React.Component {
   
   render() {
     return (
-      <div className="App columns">
-          <div style={{width: `30%`, float: 'left'}}>
+      <section className={"section"}>
+          <div className="App tile is-ancestor">
               <SearchList venues={this.state.venues} search={this.searchVenues} showMarkerInfo={this.showMarkerInfo} ref="list"/>
+              <div className={"tile is-parent is-9 map"}>
+                  <Map key="map" venues={this.state.venues} location={this.state.params.ll} ref="map" showMarkerInfo={this.showMarkerInfo} />
+              </div>
+              <VenueDetails key="venue-details" ref="venueDetails"/>
           </div>
-          <div style={{ width: `70%`, float: 'right' }}>
-              <Map key="map" venues={this.state.venues} location={this.state.params.ll} ref="map" showMarkerInfo={this.showMarkerInfo} />
-          </div>
-          <VenueDetails key="venue-details" ref="venueDetails"/>
-      </div>
+      </section>
     );
   }
 }

@@ -16,14 +16,38 @@ export default class VenueDetails extends React.Component {
             open: !this.state.open
         })
     }
+    close() {
+        this.setState({
+            ...this.state,
+            open: false
+        })
+    }
     render() {
-        return <div className={"venue-details " + (this.state.open  ? 'show' : '')}>
-            <div className="content">
-                <h2>
-                    Venue Details
-                </h2>
-                {this.state.venue.id}
+        const { venue } = this.state;
+
+        return (
+            <div className={"tile venue-details " + (this.state.open  ? 'show' : '')}>
+                <div className="content">
+                    <h2 className={"title has-text-white"}>
+                        { venue.name }
+                    </h2>
+                    {venue.price &&
+                        <div>Price: {venue.price.message}</div>
+                    }
+
+                    { venue.location &&
+                        <div>{venue.location.address}</div>
+                    }
+
+                    { venue.hours &&
+                        <div>{venue.hours.status}</div>
+                    }
+
+                    { venue.url &&
+                    <a className={"has-text-white"} href={venue.url}>Site</a>
+                    }
+                </div>
             </div>
-        </div>
+        )
     }
 }

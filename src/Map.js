@@ -37,7 +37,7 @@ export default class Map extends React.Component {
     render() {
         if (this.props.venues) {
             return(
-                <div>
+                <div style={{width: '100%'}}>
                     <MapWithMarkers venues={this.props.venues} showMarkerInfo={this.showMarkerInfo}/>
                 </div>
             )

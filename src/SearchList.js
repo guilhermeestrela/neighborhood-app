@@ -19,12 +19,17 @@ export default class SearchList extends React.Component{
     }
 
     render() {
+        const allVenues = this.props.venues.length > 0 ?
+            (this.props.venues.map((venue) => <li key={venue.id} onClick={() => this.handleClick(venue)} className={"list-item"}>{venue.name}</li>)) :
+            <li className={"list-item has-text-danger"}>Not found!!</li>
         return (
-            <div>
-                <div>
-                    <input type="text" placeholder="Search for restaurants near Bela Vista" onChange={this.handleChange} value={this.state.query}/>
+            <div className={"tile is-parent is-vertical is-3"}>
+                <div className={"tile is-child"}>
+                    <input type="text" className={"input"} placeholder="Search restaurants near Bela Vista" onChange={this.handleChange} value={this.state.query}/>
                 </div>
-                {this.props.venues.map((venue) => <div key={venue.id} onClick={() => this.handleClick(venue)}>{venue.name}</div>)}
+                <ul className="list">
+                    { allVenues }
+                </ul>
             </div>
         );
     }

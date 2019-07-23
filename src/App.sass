@@ -1,0 +1,23 @@
+// Import only what you need from Bulma
+@import '../node_modules/bulma/bulma.sass';
+
+.venue-details
+  position: fixed
+  height: 100vh
+  width: auto
+  top: 0
+  right: 0
+  background-color: rgba(0, 0, 0, 0.5)
+  color: #fff
+  max-width: 0
+  transition: all 0.4s
+  z-index: 1
+  &.show
+    max-width: 9999px
+  .content
+    padding: 1rem
+
+.map
+  position: fixed
+  right: 0
+  top: 0
