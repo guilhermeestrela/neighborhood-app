@@ -24,8 +24,8 @@ export default class SearchList extends React.Component{
 
     render() {
         const allVenues = this.props.venues.length > 0 ?
-            (this.props.venues.map((venue) => <li key={venue.id} onClick={() => this.handleClick(venue)} className={"list-item"}>{venue.name}</li>)) :
-            <li className={"panel-block has-text-danger"}>Not found!!</li>
+            (this.props.venues.map((venue) => <li key={venue.id} onClick={() => this.handleClick(venue)} className={"list-item"} role="list-item" tabIndex={0}>{venue.name}</li>)) :
+            <li className={"panel-block has-text-danger"} role="list-item" tabIndex={-1}>Not found!!</li>
         return (
             <div className={"column is-one-quarter is-full-mobile search-list"}>
                 <div className={"panel"}>
@@ -42,7 +42,7 @@ export default class SearchList extends React.Component{
                             </button>
                         </p>
                     </div>
-                    <ul className="list is-hidden-mobile">
+                    <ul className="list is-hidden-mobile" role="list">
                         { allVenues }
                     </ul>
                 </div>
