@@ -31,3 +31,11 @@ For the application work without any errors, you can change the credentials on `
 ## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
+## Service worker
+This project uses service worker built with Create React App.
+If you want to run the application in production mode, you show to:
+
+* install serve from node `npm install serve -g`
+* build the application on production mode `npm run build`
+* start the server with `serve -s build`
