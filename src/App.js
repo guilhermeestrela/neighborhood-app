@@ -41,6 +41,15 @@ export default class MapsApp extends React.Component {
 
               return this.refs.venueDetails.show(response.data.response.venue);
           })
+          .catch((e) => {
+              console.error('Error fetching for venue details', e);
+
+              const errorData = {
+                  error: true,
+                  message: 'Error fetching for details'
+              }
+              return this.refs.venueDetails.show(errorData)
+          });
   }
 
   searchVenues = (value) => {
@@ -55,7 +64,7 @@ export default class MapsApp extends React.Component {
   }
 
   showMarkerInfo = (venue) => {
-      return this.getVenueDetails(venue);
+      return this.getVenueDetails(venue.id);
   }
 
   componentDidMount() {

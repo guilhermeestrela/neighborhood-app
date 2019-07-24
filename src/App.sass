@@ -13,10 +13,22 @@
   max-width: 0
   transition: all 0.4s
   z-index: 1
+  display: flex
   &.show
     max-width: 9999px
+  .card,
   .content
     padding: 1rem
+    margin: auto
+    border-radius: 0.5rem
+    text-align: center
+    .button
+      margin: 1rem auto
+  .close-button
+    position: absolute
+    top: 0.5rem
+    left: 1rem
+    background: transparent
 
 .map
   position: absolute

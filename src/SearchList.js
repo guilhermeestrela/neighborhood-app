@@ -25,14 +25,23 @@ export default class SearchList extends React.Component{
     render() {
         const allVenues = this.props.venues.length > 0 ?
             (this.props.venues.map((venue) => <li key={venue.id} onClick={() => this.handleClick(venue)} className={"list-item"}>{venue.name}</li>)) :
-            <li className={"list-item has-text-danger"}>Not found!!</li>
+            <li className={"panel-block has-text-danger"}>Not found!!</li>
         return (
             <div className={"column is-one-quarter is-full-mobile search-list"}>
-                <div className={"box"}>
-                    <input type="text" className={"input"} placeholder="Search restaurants near Bela Vista" onChange={this.handleChange} value={this.state.query}/>
-                    <button className={"is-hidden-desktop button"} aria-label={"Show suggestions"} onClick={this.showSuggestions}>
-                        Show suggestions
-                    </button>
+                <div className={"panel"}>
+                    <div className="panel-heading">
+                        <h1>
+                            Bela Vista Restaurants
+                        </h1>
+                    </div>
+                    <div className="panel-block">
+                        <p className="control">
+                            <input type="text" className={"input"} placeholder="Search for restaurants near Bela Vista" onChange={this.handleChange} value={this.state.query}/>
+                            <button className={"is-hidden-desktop button"} aria-label={"Show suggestions"} onClick={this.showSuggestions}>
+                                Show suggestions
+                            </button>
+                        </p>
+                    </div>
                     <ul className="list is-hidden-mobile">
                         { allVenues }
                     </ul>
