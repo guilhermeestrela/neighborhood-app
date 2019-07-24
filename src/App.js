@@ -67,6 +67,10 @@ export default class MapsApp extends React.Component {
       return this.getVenueDetails(venue.id);
   }
 
+  showError = (data) => {
+      return this.refs.venueDetails.show(data);
+  }
+
   componentDidMount() {
     return this.getVenues(new URLSearchParams(this.state.params));
   }
@@ -77,7 +81,7 @@ export default class MapsApp extends React.Component {
           <div className="App columns is-desktop">
               <SearchList venues={this.state.venues} search={this.searchVenues} showMarkerInfo={this.showMarkerInfo} ref="list"/>
               <div className={"column is-relative is-three-quarters"}>
-                  <Map key="map" venues={this.state.venues} location={this.state.params.ll} ref="map" showMarkerInfo={this.showMarkerInfo} />
+                  <Map key="map" venues={this.state.venues} location={this.state.params.ll} ref="map" showMarkerInfo={this.showMarkerInfo} showError={this.showError}/>
               </div>
               <VenueDetails key="venue-details" ref="venueDetails"/>
           </div>

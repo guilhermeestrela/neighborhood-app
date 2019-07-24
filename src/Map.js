@@ -34,6 +34,43 @@ export default class Map extends React.Component {
     showMarkerInfo = (venue) => {
         return this.props.showMarkerInfo(venue);
     }
+    showError = () => {
+        const errorData = {
+            error: true,
+            message: 'Error fetching for google maps'
+        }
+
+        return this.props.showError(errorData);
+    }
+    componentDidMount() {
+        (function takeOverConsole(errorCallback) { // taken from http://tobyho.com/2012/07/27/taking-over-console-log/
+            var console = window.console
+            if (!console) return
+
+            function intercept(method) {
+                var original = console[method]
+                console[method] = function() {
+                    // check message
+                    if(arguments[0] && arguments[0].indexOf('OverQuotaMapError') !== -1) {
+                        errorCallback();
+                    }
+
+                    if (original.apply) {
+                        // Do this for normal browsers
+                        original.apply(console, arguments)
+                    } else {
+                        // Do this for IE
+                        var message = Array.prototype.slice.apply(arguments).join(' ')
+                        original(message)
+                    }
+                }
+            }
+            var methods = ['error']; // only interested in the console.error method
+            for (var i = 0; i < methods.length; i++)
+                intercept(methods[i])
+        }(this.showError))
+    }
+
     render() {
         if (this.props.venues) {
             return(
