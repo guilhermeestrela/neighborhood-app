@@ -42,7 +42,7 @@ export default class SearchList extends React.Component{
                             </button>
                         </p>
                     </div>
-                    <ul className="list is-hidden-mobile" role="list">
+                    <ul className="list is-hidden-mobile">
                         { allVenues }
                     </ul>
                 </div>
